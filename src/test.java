@@ -35,13 +35,36 @@ public class test {
 		System.out.print(s.length());
 		System.out.println(a+b);
 		*/
-		genre gen = genre.comedy;
-		System.out.println(gen);
-		System.out.println(gen.toString().equals("comedy"));
-		
-		switch (gen.toString()) {
-		case "comedy":
-			System.out.print("ss");
+		System.out
+		.println("Please enter the genre of the DVD from the list above:");
+		String g = scanner2.nextLine();
+		while (true) {
+			if (g.equals("comedy")) {
+				System.out.println("The comedy DVD is listed below:\n");
+				break;
+			}
+			if (g.equals("drama")) {
+				System.out.println("The drama DVD is listed below:\n");
+				break;
+			}
+			if (g.equals("documentary")) {
+				System.out.println("The documentary DVD is listed below:\n");
+				break;
+			}
+			if (g.equals("horror")) {
+				System.out.println("The horror DVD is listed below:\n");
+				break;
+			}
+			if (g.equals("romance")) {
+				System.out.println("The romance DVD is listed below:\n");
+				break;
+			}
+			if (g.equals("musical")) {
+				System.out.println("The musical DVD is listed below:\n");
+				break;
+			}
+
+			// exception
 		}
 		
 	}

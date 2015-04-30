@@ -2,6 +2,7 @@
 public class Linked {
 
 	/**
+	 * a Linked list to store the ordered DVDs
 	 * @param args
 	 */
 	private DVD dvd;
@@ -99,7 +100,20 @@ public class Linked {
 				if (!dvd.isRented()) {
 					if (g.equals(dvd.getGenre())) dvd.display();
 				}
-				next.displayInventory();
+				next.displayGenre(g);
 		}
+	}
+	
+	public int countGenre(String g) {
+		if (next == null) {
+			if (g.equals(dvd.getGenre())) {
+				return 1;
+			}
+			return 0;
+		}
+		if (g.equals(dvd.getGenre())) {
+			return 1 + next.countGenre(g);
+		}
+		return next.countGenre(g);
 	}
 }

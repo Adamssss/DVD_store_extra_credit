@@ -21,31 +21,6 @@ public class DVD {
 		gen = genre.drama;
 	}
 	
-	public void setGenre(String g) {
-		switch(g) {
-		case "comedy":
-			gen = genre.comedy;
-			break;
-		case "drama":
-			gen = genre.drama;
-			break;
-		case "documentary":
-			gen = genre.documentary;
-			break;
-		case "horror":
-			gen = genre.horror;
-			break;
-		case "romance":
-			gen = genre.romance;
-			break;
-		case "musical":
-			gen = genre.musical;
-			break;
-		default:
-			//gen = genre.drama;
-		}
-	}
-	
 	public String getGenre() {
 		return gen.toString();
 	}
@@ -74,6 +49,7 @@ public class DVD {
 		onSalePrice = price;
 	}
 	
+	// return normal price or on sale price
 	public double getPrice() {
 		if (onSale) return onSalePrice;
 		return rentalPrice;
@@ -85,7 +61,6 @@ public class DVD {
 	}
 	
 	public void display() {
-
 			System.out.print(title);
 			double price;
 			if (onSale) {
@@ -106,6 +81,15 @@ public class DVD {
 				System.out.print("Currently Free!\t");
 			}
 			System.out.println(numberOfTimesRented);
-
+	}
+	
+	// for test only
+	public void setRentedTimes(int t) {
+		numberOfTimesRented = t;
+	}
+	
+	// for test only
+	public void setGenre(genre g) {
+		gen = g;
 	}
 }
