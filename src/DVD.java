@@ -14,6 +14,7 @@ public class DVD {
 	public DVD(String title,double price) {
 		this.title = title;
 		this.rentalPrice = price;
+		onSale = false;
 	}
 	
 	public String getTitle() {

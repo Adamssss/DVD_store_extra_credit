@@ -41,7 +41,11 @@ public class DVDstore {
 				continue;
 			}
 			if (func == 7) {
-				break;
+				System.out.println("Are you sure you want to quit? - all your data will be lost.");
+				String quit = scanner2.nextLine();
+				if (quit.equals("yes")) {
+					break;
+				}
 			}
 		}
 	}
@@ -53,8 +57,7 @@ public class DVDstore {
 
 	public static void displayMainMenu() {
 		System.out
-				.println("Welcome to the DVD Store! Select an option below: ");
-		System.out.println();
+				.println("Welcome to the DVD Store! Select an option below: \n");
 		System.out.println("1) add an DVD");
 		System.out.println("2) remove an DVD");
 		System.out.println("3) display inventory");
@@ -62,8 +65,7 @@ public class DVDstore {
 		System.out.println("5) display genre");
 		System.out.println("6) rent DVD");
 		System.out.println("7) quit ");
-		System.out.println();
-		System.out.println("Select an option above: ");
+		System.out.println("\nSelect an option above: ");
 	}
 
 	/*
@@ -140,7 +142,7 @@ public class DVDstore {
 			}
 		}
 		DVDstore.remove(title);
-		// confrim
+		// confirm
 		System.out.println("DVD removed.\n");
 		// keep removing?
 		System.out.println("Would you like to remove another DVD? (yes/no)");
@@ -171,17 +173,39 @@ public class DVDstore {
 		String wait = scanner2.nextLine();
 	}
 
+	/*
+	 * the user will be prompted for a title. The ¡®on sale¡¯ status of the DVD
+	 * will be toggled. If the ¡®on sale¡¯ status of the DVD is now true the user
+	 * will be prompted for a sale price.
+	 */
 	public static void onOffSale() {
+		System.out.println("Now you can change the on/off sale status.\n");
+		System.out
+				.println("Please type the title of the DVD you want to change:");
 		String title = scanner2.nextLine();
 		DVD temp = DVDstore.find(title);
 		while (temp == null) {
-			// exception
+			// wrong title exception
+			System.out.println("There is no such DVD. Please try again.\n");
+			// take the alternate title
+			System.out
+					.println("Please type the title of the DVD you want to change: (type \"-quit\" to quit)");
+			title = scanner2.nextLine();
+			if (title.equals("-quit")) {
+				return;
+			}
+			temp = DVDstore.find(title);
 		}
 		temp.flipsale();
 		if (temp.isOnSale()) {
+			System.out.println("This DVD is now on sale.");
+			System.out.println("Please type the on sale price:");
 			// set onsale price
-
+			double price = scanner1.nextInt();
+			temp.setOnSalePrice(price);
 		}
+		// confirm
+		System.out.println("Status changed.\n");
 	}
 
 	public static void displaygenre() {
