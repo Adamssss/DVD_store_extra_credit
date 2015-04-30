@@ -9,7 +9,7 @@ public class DVD {
 	private boolean onSale;
 	private int numberOfTimesRented;
 	private boolean isCurrentlyRented;
-	private enum genre {comedy, drama, documentary, horror, romance, musical}
+	private genre gen;
 	
 	public DVD(String title,double price) {
 		this.title = title;
@@ -17,6 +17,37 @@ public class DVD {
 		onSale = false;
 		isCurrentlyRented = false;
 		numberOfTimesRented = 0;
+		// default genre? all dvd can be drama?
+		gen = genre.drama;
+	}
+	
+	public void setGenre(String g) {
+		switch(g) {
+		case "comedy":
+			gen = genre.comedy;
+			break;
+		case "drama":
+			gen = genre.drama;
+			break;
+		case "documentary":
+			gen = genre.documentary;
+			break;
+		case "horror":
+			gen = genre.horror;
+			break;
+		case "romance":
+			gen = genre.romance;
+			break;
+		case "musical":
+			gen = genre.musical;
+			break;
+		default:
+			//gen = genre.drama;
+		}
+	}
+	
+	public String getGenre() {
+		return gen.toString();
 	}
 	
 	public String getTitle() {

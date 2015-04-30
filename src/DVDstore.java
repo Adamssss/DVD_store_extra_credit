@@ -49,6 +49,7 @@ public class DVDstore {
 				}
 			}
 		}
+		System.out.println("DVD Store closed.");
 	}
 
 	public static void testinit() {
@@ -210,7 +211,38 @@ public class DVDstore {
 	}
 
 	public static void displaygenre() {
-
+		if (DVDstore.getDVD() == null) {
+			System.out.println("There is no DVD in the inventory.\n");
+			return;
+		}
+		System.out.println("Genre: comedy, drama, documentary, horror, romance, musical");
+		System.out
+		.println("Please enter the genre of the DVD from the list above:");
+		String g = scanner2.nextLine();
+		switch(g) {
+		case "comedy":
+			System.out.println("The comedy DVD is listed below:\n");
+			break;
+		case "drama":
+			System.out.println("The drama DVD is listed below:\n");
+			break;
+		case "documentary":
+			System.out.println("The documentary DVD is listed below:\n");
+			break;
+		case "horror":
+			System.out.println("The horror DVD is listed below:\n");
+			break;
+		case "romance":
+			System.out.println("The romance DVD is listed below:\n");
+			break;
+		case "musical":
+			System.out.println("The musical DVD is listed below:\n");
+			break;
+		default:
+			//exception
+		}
+		System.out.println("DVD title \t\t\trental price \ttimes rented");
+		DVDstore.displayGenre(g);
 	}
 
 	/*
@@ -254,7 +286,7 @@ public class DVDstore {
 		String deduct = scanner2.nextLine();
 		if (deduct.equals("yes")) {
 			temp.rent();
-			// confrim
+			// confirm
 			System.out.println("DVD rented.\n");
 		}
 		// keep renting?

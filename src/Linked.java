@@ -89,5 +89,17 @@ public class Linked {
 		}
 		return next.find(title);
 	}
-
+	
+	public void displayGenre(String g) {
+		if (next == null) {
+			if (dvd != null && !dvd.isRented()) {
+				if (g.equals(dvd.getGenre())) dvd.display();
+			}
+		} else {
+				if (!dvd.isRented()) {
+					if (g.equals(dvd.getGenre())) dvd.display();
+				}
+				next.displayInventory();
+		}
+	}
 }
