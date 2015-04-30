@@ -167,7 +167,7 @@ public class DVDstore {
 			return;
 		}
 		System.out.println("DVD title \t\t\trental price \ttimes rented");
-		DVDstore.display();
+		DVDstore.displayInventory();
 		// wait for some time
 		System.out.println("\nPress Enter to continue.");
 		String wait = scanner2.nextLine();
@@ -213,6 +213,35 @@ public class DVDstore {
 	}
 
 	public static void rentDVD() {
+		if (DVDstore.getDVD() == null) {
+			System.out.println("There is no DVD in the inventory.\n");
+			return;
+		}
+		System.out.println("The DVD you can rent is listed below:\n");
+		System.out.println("DVD title \t\t\trental price \ttimes rented");
+		DVDstore.displayInventory();
+		//
+		String title = scanner2.nextLine();
+		DVD temp = DVDstore.find(title);
+		while (temp == null || temp.isRented()) {
+			if (temp == null) {
+				continue;
+			}
+			if (temp.isRented()) {
+				continue;
+			}
+			break;
+		}
+		double price = temp.getPrice();
+		System.out.print("Are you sure you would like us to deduct $");
+		System.out.print(price);
+		System.out.print(" from your credit card?");
+		String deduct = scanner2.nextLine();
+		if (deduct.equals("yes")) {
+			temp.rent();
+		}
+		
+		
 
 	}
 

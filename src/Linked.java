@@ -68,12 +68,12 @@ public class Linked {
 		}
 	}
 	
-	public void display() {
+	public void displayInventory() {
 		if (next == null) {
-			if (dvd != null) dvd.display();
+			if (dvd != null && !dvd.isRented()) dvd.display();
 		} else {
-				dvd.display();
-				next.display();
+				if (!dvd.isRented()) dvd.display();
+				next.displayInventory();
 		}
 	}
 	

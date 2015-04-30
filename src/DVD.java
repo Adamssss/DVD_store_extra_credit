@@ -15,6 +15,7 @@ public class DVD {
 		this.title = title;
 		this.rentalPrice = price;
 		onSale = false;
+		isCurrentlyRented = false;
 	}
 	
 	public String getTitle() {
@@ -29,19 +30,42 @@ public class DVD {
 		return onSale;
 	}
 	
+	public boolean isRented() {
+		return isCurrentlyRented;
+	}
+	
+	public void flipRent() {
+		isCurrentlyRented = !isCurrentlyRented;
+	}
+	
 	public void setOnSalePrice(double price) {
 		onSalePrice = price;
 	}
 	
+	public double getPrice() {
+		if (onSale) return onSalePrice;
+		return rentalPrice;
+	}
+	
+	public void rent() {
+		
+	}
+	
 	public void display() {
 
-			System.out.print(title + "\t\t\t\t");
+			System.out.print(title);
 			double price;
 			if (onSale) {
 				price = onSalePrice;
+				System.out.print(" - On Sale!");
 			} else {
 				price = rentalPrice;
+				System.out.print("           ");
 			}
+			for(int i=0;i<20-title.length();i++){
+				System.out.print(" ");
+			}
+			System.out.print("\t");
 			if (price > 0) {
 				System.out.print(price);
 				System.out.print("\t\t");
