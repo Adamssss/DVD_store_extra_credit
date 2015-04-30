@@ -16,6 +16,7 @@ public class DVD {
 		this.rentalPrice = price;
 		onSale = false;
 		isCurrentlyRented = false;
+		numberOfTimesRented = 0;
 	}
 	
 	public String getTitle() {
@@ -48,7 +49,8 @@ public class DVD {
 	}
 	
 	public void rent() {
-		
+		flipRent();
+		numberOfTimesRented++;
 	}
 	
 	public void display() {

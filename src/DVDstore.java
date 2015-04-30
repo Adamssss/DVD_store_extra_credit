@@ -11,6 +11,7 @@ public class DVDstore {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		// this init is used for test only
 		testinit();
 
 		while (true) {
@@ -78,7 +79,7 @@ public class DVDstore {
 	public static void add() {
 		System.out.println("Now you can add a new DVD.\n");
 		// get the new dvd information
-		System.out.println("Please type the title of the new DVD:");
+		System.out.println("Please enter the title of the new DVD:");
 		String title = scanner2.nextLine();
 		// check if any dvd exist
 		if (DVDstore.getDVD() == null) {
@@ -93,7 +94,7 @@ public class DVDstore {
 						.println("This DVD already exists. Please try again.\n");
 				// take the alternate title
 				System.out
-						.println("Please type the title of the new DVD: (type \"-quit\" to quit)");
+						.println("Please enter the title of the new DVD: (type \"-quit\" to quit)");
 				title = scanner2.nextLine();
 				if (title.equals("-quit")) {
 					return;
@@ -128,14 +129,14 @@ public class DVDstore {
 		System.out.println("Now you can remove a DVD.\n");
 		// get the dvd information
 		System.out
-				.println("Please type the title of the DVD you want to remove:");
+				.println("Please enter the title of the DVD you want to remove:");
 		String title = scanner2.nextLine();
 		while (!DVDstore.contains(title)) {
 			// no dvd exception
 			System.out.println("There is no such DVD. Please try again.\n");
 			// take the alternate title
 			System.out
-					.println("Please type the title of the DVD you want to remove: (type \"-quit\" to quit)");
+					.println("Please enter the title of the DVD you want to remove: (type \"-quit\" to quit)");
 			title = scanner2.nextLine();
 			if (title.equals("-quit")) {
 				return;
@@ -181,7 +182,7 @@ public class DVDstore {
 	public static void onOffSale() {
 		System.out.println("Now you can change the on/off sale status.\n");
 		System.out
-				.println("Please type the title of the DVD you want to change:");
+				.println("Please enter the title of the DVD you want to change:");
 		String title = scanner2.nextLine();
 		DVD temp = DVDstore.find(title);
 		while (temp == null) {
@@ -189,7 +190,7 @@ public class DVDstore {
 			System.out.println("There is no such DVD. Please try again.\n");
 			// take the alternate title
 			System.out
-					.println("Please type the title of the DVD you want to change: (type \"-quit\" to quit)");
+					.println("Please enter the title of the DVD you want to change: (type \"-quit\" to quit)");
 			title = scanner2.nextLine();
 			if (title.equals("-quit")) {
 				return;
@@ -212,6 +213,14 @@ public class DVDstore {
 
 	}
 
+	/*
+	 * the current store inventory will be displayed in alphabetical order.
+	 * Then, the user will be prompted for which DVD he/she would like to rent.
+	 * A warning message will be displayed: ¡°Are you sure you would like us to
+	 * deduct $X from your credit card?¡± The user can answer yes, or no. A count
+	 * of the number of times each DVD is rented is maintained as part of the
+	 * store inventory
+	 */
 	public static void rentDVD() {
 		if (DVDstore.getDVD() == null) {
 			System.out.println("There is no DVD in the inventory.\n");
@@ -220,17 +229,23 @@ public class DVDstore {
 		System.out.println("The DVD you can rent is listed below:\n");
 		System.out.println("DVD title \t\t\trental price \ttimes rented");
 		DVDstore.displayInventory();
-		//
+		System.out.println();
+		System.out
+				.println("Please enter the title of the DVD you want to rent:");
 		String title = scanner2.nextLine();
 		DVD temp = DVDstore.find(title);
 		while (temp == null || temp.isRented()) {
-			if (temp == null) {
-				continue;
+			// exception
+			System.out
+					.println("There is no such DVD or the DVD is rented. Please try again.\n");
+			// take the alternate title
+			System.out
+					.println("Please enter the title of the DVD you want to rent: (type \"-quit\" to quit)");
+			title = scanner2.nextLine();
+			if (title.equals("-quit")) {
+				return;
 			}
-			if (temp.isRented()) {
-				continue;
-			}
-			break;
+			temp = DVDstore.find(title);
 		}
 		double price = temp.getPrice();
 		System.out.print("Are you sure you would like us to deduct $");
@@ -239,10 +254,15 @@ public class DVDstore {
 		String deduct = scanner2.nextLine();
 		if (deduct.equals("yes")) {
 			temp.rent();
+			// confrim
+			System.out.println("DVD rented.\n");
 		}
-		
-		
-
+		// keep renting?
+		System.out.println("Would you like to rent another DVD? (yes/no)");
+		String keepRent = scanner2.nextLine();
+		if (keepRent.equals("yes")) {
+			rentDVD();
+		}
 	}
 
 }
