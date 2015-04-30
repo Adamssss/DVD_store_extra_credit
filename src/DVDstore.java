@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class DVDstore {
 
-	private static Linked DVDstore = new Linked(null, null);	
+	private static Linked DVDstore = new Linked(null, null);
 	// two scanners for String and numbers
 	private static Scanner scanner1 = new Scanner(System.in);
 	private static Scanner scanner2 = new Scanner(System.in);
@@ -11,7 +11,7 @@ public class DVDstore {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		 testinit();
+		testinit();
 
 		while (true) {
 			displayMainMenu();
@@ -47,11 +47,8 @@ public class DVDstore {
 	}
 
 	public static void testinit() {
-		DVDstore = new Linked(new DVD("c", 1), 
-				new Linked(new DVD("e",3),
-				new Linked(new DVD("t",4),
-				new Linked(new DVD("z",2),
-									null))));
+		DVDstore = new Linked(new DVD("c", 1), new Linked(new DVD("e", 3),
+				new Linked(new DVD("t", 4), new Linked(new DVD("z", 2), null))));
 	}
 
 	public static void displayMainMenu() {
@@ -77,7 +74,7 @@ public class DVDstore {
 	 * for an alternate DVD title.
 	 */
 	public static void add() {
-		System.out.println("Now you can add a new DVD\n");
+		System.out.println("Now you can add a new DVD.\n");
 		// get the new dvd information
 		System.out.println("Please type the title of the new DVD:");
 		String title = scanner2.nextLine();
@@ -91,7 +88,7 @@ public class DVDstore {
 			while (DVDstore.contains(title)) {
 				// same title exception
 				System.out
-						.println("This DVD already exists, please try again\n");
+						.println("This DVD already exists. Please try again.\n");
 				// take the alternate title
 				System.out
 						.println("Please type the title of the new DVD: (type \"-quit\" to quit)");
@@ -115,17 +112,63 @@ public class DVDstore {
 		}
 	}
 
+	/*
+	 * the user will be prompted for a title. The DVD with that title will be
+	 * removed from the inventory
+	 */
 	public static void remove() {
+		// check if dvd exists
+		if (DVDstore.getDVD() == null) {
+			System.out.println("There is no DVD in the inventory.\n");
+			return;
+		}
+
+		System.out.println("Now you can remove a DVD.\n");
+		// get the dvd information
+		System.out
+				.println("Please type the title of the DVD you want to remove:");
 		String title = scanner2.nextLine();
 		while (!DVDstore.contains(title)) {
-			// exception
+			// no dvd exception
+			System.out.println("There is no such DVD. Please try again.\n");
+			// take the alternate title
+			System.out
+					.println("Please type the title of the DVD you want to remove: (type \"-quit\" to quit)");
+			title = scanner2.nextLine();
+			if (title.equals("-quit")) {
+				return;
+			}
 		}
 		DVDstore.remove(title);
+		// confrim
+		System.out.println("DVD removed.\n");
+		// keep removing?
+		System.out.println("Would you like to remove another DVD? (yes/no)");
+		String keepRemove = scanner2.nextLine();
+		if (keepRemove.equals("yes")) {
+			remove();
+		}
 	}
 
+	/*
+	 * the current inventory of the store will be displayed in alphabetical
+	 * order - DVD title, current rental price and number of times the DVD was
+	 * rented. Display information about the DVD only if it is currently NOT
+	 * rented. Price displayed is the original rental price unless the DVD is
+	 * currently on sale, then display the sale price. As a promotional tool, if
+	 * the price is 0.00, display ¡°Currently Free!¡± next to the DVD listing. If
+	 * it is on sale, display ¡°On Sale!¡± next to the DVD.
+	 */
 	public static void display() {
+		if (DVDstore.getDVD() == null) {
+			System.out.println("There is no DVD in the inventory.\n");
+			return;
+		}
 		System.out.println("DVD title \t\t\trental price \ttimes rented");
 		DVDstore.display();
+		// wait for some time
+		System.out.println("\nPress Enter to continue.");
+		String wait = scanner2.nextLine();
 	}
 
 	public static void onOffSale() {
