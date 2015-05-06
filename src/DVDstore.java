@@ -48,6 +48,7 @@ public class DVDstore {
 					break;
 				}
 			}
+			System.out.println("Not a valid option. Please try again.\n");
 		}
 		System.out.println("DVD Store closed.");
 	}
